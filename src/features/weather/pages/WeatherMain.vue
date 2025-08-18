@@ -28,7 +28,7 @@ const districts = computed<Location[]>(() => districtStore.districts)
 const districtsLoading = computed<boolean>(() => districtStore.loading)
 const villages = computed<Location[]>(() => villageStore.villages)
 const villagesLoading = computed<boolean>(() => villageStore.loading)
-const weather = computed(() => weatherStore.weather)
+const locationWeather = computed(() => weatherStore.locationWeather)
 
 function onChangeProvince(): void {
   regency.value = ''
@@ -121,7 +121,7 @@ function onSelectVillage(): void {
 
   <br />
   <br />
-  <pre v-if="!!village">{{ weather }}</pre>
+  <pre v-if="!!village">{{ locationWeather }}</pre>
 </template>
 
 <style scoped>

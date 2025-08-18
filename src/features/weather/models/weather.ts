@@ -1,4 +1,4 @@
-export interface Location {
+export interface LocationResponse {
   adm1: string
   adm2: string
   adm3: string
@@ -13,7 +13,7 @@ export interface Location {
   type?: string
 }
 
-export interface Weather {
+export interface WeatherResponse {
   datetime: string
   t: number
   tcc: number
@@ -36,12 +36,25 @@ export interface Weather {
   source?: string
 }
 
-export interface WeatherData {
-  lokasi: Location
-  cuaca: Weather[][]
+export interface WeatherDataResponse {
+  lokasi: LocationResponse
+  cuaca: WeatherResponse[][]
 }
 
 export interface WeatherResponse {
-  lokasi: Location
-  data: WeatherData[]
+  lokasi: LocationResponse
+  data: WeatherDataResponse[]
+}
+
+export interface LocationWeather {
+  locationCode: string
+  locationName: string
+  localDatetime: string
+  weatherDesc: string
+  temperature: number
+  humidity: number
+  windSpeed: number
+  windDirectionFrom: string
+  windDirectionTo: string
+  image: string
 }
