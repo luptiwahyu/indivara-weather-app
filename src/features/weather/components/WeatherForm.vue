@@ -21,14 +21,13 @@ provinceStore.fetchProvinces()
 
 const provinces = computed<Location[]>(() => provinceStore.provinces)
 const provincesLoading = computed<boolean>(() => provinceStore.loading)
+const isError = computed<boolean>(() => !!provinceStore.error)
 const regencies = computed<Location[]>(() => regencyStore.regencies)
 const regenciesLoading = computed<boolean>(() => regencyStore.loading)
 const districts = computed<Location[]>(() => districtStore.districts)
 const districtsLoading = computed<boolean>(() => districtStore.loading)
 const villages = computed<Location[]>(() => villageStore.villages)
 const villagesLoading = computed<boolean>(() => villageStore.loading)
-const weather = computed(() => weatherStore.locationWeather)
-const weatherLoading = computed(() => weatherStore.loading)
 
 function onChangeProvince(): void {
   formStore.resetRegencyDistrictVillage()
@@ -70,6 +69,20 @@ function onSelectVillage(): void {
         {{ prov.name }}
       </option>
     </select>
+
+    <div v-if="isError" class="input-width mt-4 italic text-center">
+      <span>Error fetching data.</span>
+      <br />
+      <span>Please install </span>
+      <a
+        class="underline text-red-500 font-semibold"
+        href="https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf"
+        target="_blank"
+      >
+        this
+      </a>
+      <span> extension to allow CORS</span>
+    </div>
 
     <div v-if="!!form.province">
       <br />
@@ -120,12 +133,6 @@ function onSelectVillage(): void {
           {{ village.name }}
         </option>
       </select>
-    </div>
-
-    <div v-show="!!form.village">
-      <br />
-      <pre v-show="weatherLoading">Loading...</pre>
-      <pre v-show="!weatherLoading">{{ weather }}</pre>
     </div>
   </div>
 </template>

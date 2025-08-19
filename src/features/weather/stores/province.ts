@@ -8,16 +8,19 @@ import { BASE_URL } from '../constants'
 export const useProvinceStore = defineStore('province', () => {
   const provinces = ref<Location[]>([])
   const loading = ref<boolean>(false)
+  const error = ref<string>('')
 
   const fetchProvinces = async (): Promise<void> => {
     loading.value = true
+    error.value = ''
+
     try {
       const provinceUrl = `${BASE_URL}provinces.json`
       const response: AxiosResponse<LocationResponse> = await axios.get(provinceUrl)
       provinces.value = response.data.data
     } catch (err) {
-      const error = err as AxiosError
-      console.error('Error fetching provinces:', error.message)
+      const responseError = err as AxiosError
+      error.value = `Error fetching provinces: ${responseError.message}`
     } finally {
       loading.value = false
     }
@@ -26,6 +29,7 @@ export const useProvinceStore = defineStore('province', () => {
   return {
     provinces,
     loading,
+    error,
     fetchProvinces,
   }
 })
