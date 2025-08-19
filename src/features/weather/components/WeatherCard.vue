@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Pin from './icons/Pin.vue'
-import Wind from './icons/Wind.vue'
-import Humidity from './icons/Humidity.vue'
-import Direction from './icons/Direction.vue'
-import Time from './icons/Time.vue'
+import PinIcon from './icons/PinIcon.vue'
+import WindIcon from './icons/WindIcon.vue'
+import HumidityIcon from './icons/HumidityIcon.vue'
+import DirectionIcon from './icons/DirectionIcon.vue'
+import TimeIcon from './icons/TimeIcon.vue'
 import { useFormStore } from '../stores/form'
 import { useWeatherStore } from '../stores/weather'
 import { computed } from 'vue'
@@ -55,7 +55,7 @@ function changeLocation(): void {
       >
         <div>
           <div title="Wind Speed">
-            <Wind class="size-8 mb-1" />
+            <WindIcon class="size-8 mb-1" />
           </div>
           <div class="caption dark:text-[#8497C9]">
             {{ weather?.windSpeed }} km/h
@@ -63,7 +63,7 @@ function changeLocation(): void {
         </div>
         <div>
           <div title="Location">
-            <Pin class="size-8 mb-1" />
+            <PinIcon class="size-8 mb-1" />
           </div>
           <div
             class="caption dark:text-[#8497C9] break-all location-text"
@@ -74,7 +74,7 @@ function changeLocation(): void {
         </div>
         <div>
           <div title="Humidity">
-            <Humidity class="size-8 mb-1" />
+            <HumidityIcon class="size-8 mb-1" />
           </div>
           <div class="caption dark:text-[#8497C9]">
             {{ weather?.humidity }}%
@@ -88,7 +88,7 @@ function changeLocation(): void {
       >
         <div>
           <div title="Time">
-            <Time class="size-7 mb-1" />
+            <TimeIcon class="size-7 mb-1" />
           </div>
           <div
             class="caption dark:text-[#8497C9] break-all location-text !w-[140px]"
@@ -99,7 +99,7 @@ function changeLocation(): void {
         </div>
         <div>
           <div title="Wind Direction">
-            <Direction class="size-7 mb-1" />
+            <DirectionIcon class="size-7 mb-1" />
           </div>
           <div
             class="caption dark:text-[#8497C9] break-all location-text !w-[140px]"
