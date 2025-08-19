@@ -39,6 +39,7 @@ Enable Allow CORS Extension
 ### Tech Stack
 
 - Vue 3 (Composition API)
+- Pinia
 - TypeScript
 - Tailwind CSS
 - Axios
