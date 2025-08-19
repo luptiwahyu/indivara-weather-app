@@ -25,6 +25,7 @@ npm run lint
 ### Install [Allow CORS](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) Extension
 
 This Extension to Allow CORS: Access-Control-Allow-Origin
+
 https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
 
 Open Allow CORS Extension
