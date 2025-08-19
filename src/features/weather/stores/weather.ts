@@ -7,7 +7,7 @@ import type {
   LocationResponse,
   LocationWeather
 } from '../models/weather'
-import { compass } from '../utils'
+import { compass } from '../utils/helper'
 
 export const useWeatherStore = defineStore('weather', () => {
   const loading = ref<boolean>(false)
