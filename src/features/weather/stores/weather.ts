@@ -14,6 +14,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const locationWeather = ref<LocationWeather | null>(null)
 
   const fetchWeather = async (villageCode: string): Promise<void> => {
+    loading.value = true
     try {
       const url: string = `https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4=${villageCode}`
       const response: AxiosResponse<WeatherResponse> = await axios.get(url)
@@ -34,6 +35,8 @@ export const useWeatherStore = defineStore('weather', () => {
     } catch (err) {
       const error = err as AxiosError
       console.error('Error fetching weather: ', error.message)
+    } finally {
+      loading.value = false
     }
   }
 
