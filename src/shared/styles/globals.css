@@ -3,6 +3,7 @@
 
 select {
   @apply
+  bg-white
   p-1.5
   border
   border-gray-500

@@ -49,12 +49,11 @@ export interface WeatherResponse {
 export interface LocationWeather {
   locationCode: string
   locationName: string
-  localDatetime: string
+  datetime: string
   weatherDesc: string
   temperature: number
   humidity: number
   windSpeed: number
-  windDirectionFrom: string
-  windDirectionTo: string
+  windDirection: string
   image: string
 }

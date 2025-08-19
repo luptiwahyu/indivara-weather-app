@@ -7,21 +7,14 @@
   --vt-c-black: #181818;
 }
 
-/* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
   --color-primary: #296399;
   --primary-text: var(--color-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-  }
-}
-
 body {
-  /* background-color: #4a7dff; */
+  background-color: oklch(96.8% 0.007 247.896);
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-optical-sizing: auto;
   color: var(--primary-text);

@@ -4,83 +4,113 @@ import Wind from './icons/Wind.vue'
 import Humidity from './icons/Humidity.vue'
 import Direction from './icons/Direction.vue'
 import Time from './icons/Time.vue'
+import { useFormStore } from '../stores/form'
+import { useWeatherStore } from '../stores/weather'
+import { computed } from 'vue'
+import type { LocationWeather } from '../models/weather'
 
-const iconColor = '#296399'
+const formStore = useFormStore()
+const weatherStore = useWeatherStore()
+
+const loading = computed<boolean>(() => weatherStore.loading)
+const weather = computed<LocationWeather | null>(() => weatherStore.locationWeather)
+
+function changeLocation(): void {
+  formStore.resetVillage()
+}
 </script>
 
 <template>
-  <div class="card">
-    <div class="grid grid-cols-2 gap-2 place-items-center">
-      <div>
-        <img
-          class="h-22"
-          src="https://api-apps.bmkg.go.id/storage/icon/cuaca/hujan ringan-am.svg"
-          alt="weather-icon"
-        />
-      </div>
-      <div>
-        <div class="text-7xl font-bold dark:text-slate-300">
-          <span>{{ '21' }}</span>
-          <span>°</span>
-        </div>
-        <div class="text-lg primary-text dark:text-[#6E85C1] mt-2">
-          {{ 'Light Rain' }}
-        </div>
-      </div>
-    </div>
-
+  <div v-if="loading" class="text-lg text-center">Loading...</div>
+  <div v-else>
     <div
-      class="grid grid-cols-3 gap-3 place-items-center text-sm mt-10 mb-2"
-      align="center"
+      class="text-lg cursor-pointer hover:underline text-center mb-5"
+      @click="changeLocation"
     >
-      <div>
-        <div title="Wind Speed">
-          <Wind class="size-8 mb-1" :color="iconColor" />
-        </div>
-        <div class="caption dark:text-[#8497C9]">{{ '5.9' }} km/h</div>
-      </div>
-      <div>
-        <div title="Location">
-          <Pin class="size-8 mb-1" :color="iconColor" />
-        </div>
-        <div
-          class="caption dark:text-[#8497C9] break-all location-text"
-          :title="'Cibuntu'"
-        >
-          {{ 'Cibuntu' }}
-        </div>
-      </div>
-      <div>
-        <div title="Humidity">
-          <Humidity class="size-8 mb-1" :color="iconColor" />
-        </div>
-        <div class="caption dark:text-[#8497C9]">{{ '85' }}%</div>
-      </div>
+      Change location
     </div>
+    <div class="card">
+      <div class="grid grid-cols-2 gap-2 place-items-center">
+        <div>
+          <img
+            class="h-22"
+            :src="weather?.image"
+            alt="weather-icon"
+          />
+        </div>
+        <div>
+          <div class="text-7xl font-bold dark:text-slate-300">
+            <span>{{ weather?.temperature }}</span>
+            <span>°</span>
+          </div>
+          <div class="text-lg primary-text dark:text-[#6E85C1] mt-2">
+            {{ weather?.weatherDesc }}
+          </div>
+        </div>
+      </div>
 
-    <div
-      class="grid grid-cols-2 gap-3 place-items-center text-sm mt-10 mb-2"
-      align="center"
-    >
-      <div>
-        <div title="Time">
-          <Time class="size-8 mb-1" :color="iconColor" />
+      <div
+        class="grid grid-cols-3 gap-3 place-items-center text-sm mt-10"
+        align="center"
+      >
+        <div>
+          <div title="Wind Speed">
+            <Wind class="size-8 mb-1" />
+          </div>
+          <div class="caption dark:text-[#8497C9]">
+            {{ weather?.windSpeed }} km/h
+          </div>
         </div>
-        <div class="caption dark:text-[#8497C9]">{{ '19 Aug 2025, 15:00' }}</div>
+        <div>
+          <div title="Location">
+            <Pin class="size-8 mb-1" />
+          </div>
+          <div
+            class="caption dark:text-[#8497C9] break-all location-text"
+            :title="weather?.locationName"
+          >
+            {{ weather?.locationName }}
+          </div>
+        </div>
+        <div>
+          <div title="Humidity">
+            <Humidity class="size-8 mb-1" />
+          </div>
+          <div class="caption dark:text-[#8497C9]">
+            {{ weather?.humidity }}%
+          </div>
+        </div>
       </div>
-      <div>
-        <div title="Wind Direction">
-          <Direction class="size-8 mb-1" :color="iconColor" />
+
+      <div
+        class="grid grid-cols-2 gap-2 place-items-center text-sm mt-5 mb-2"
+        align="center"
+      >
+        <div>
+          <div title="Time">
+            <Time class="size-7 mb-1" />
+          </div>
+          <div
+            class="caption dark:text-[#8497C9] break-all location-text !w-[140px]"
+            :title="weather?.datetime"
+          >
+            {{ weather?.datetime }}
+          </div>
         </div>
-        <div
-          class="caption dark:text-[#8497C9]"
-          :title="'North to Northeast'"
-        >
-          {{ 'North to Northeast' }}
+        <div>
+          <div title="Wind Direction">
+            <Direction class="size-7 mb-1" />
+          </div>
+          <div
+            class="caption dark:text-[#8497C9] break-all location-text !w-[140px]"
+            :title="weather?.windDirection"
+          >
+            {{ weather?.windDirection }}
+          </div>
         </div>
       </div>
+
     </div>
-
   </div>
 </template>
 
@@ -94,7 +124,7 @@ const iconColor = '#296399'
 }
 
 .card {
-  @apply rounded-2xl px-4 py-10 m-5 drop-shadow-2xl w-80 bg-[#C9E5FF] dark:bg-[#1F2E54] transition-colors duration-300;
+  @apply rounded-2xl px-4 py-10 drop-shadow-2xl w-80 bg-[#C9E5FF] dark:bg-[#1F2E54] transition-colors duration-300;
 }
 
 .location-text {

@@ -7,10 +7,10 @@ import type {
   LocationResponse,
   LocationWeather
 } from '../models/weather'
-import { compass } from '../utils/helper'
+import { compass, formattedDate } from '../utils/helper'
 
 export const useWeatherStore = defineStore('weather', () => {
-  const loading = ref<boolean>(false)
+  const loading = ref<boolean>(true)
   const locationWeather = ref<LocationWeather | null>(null)
 
   const fetchWeather = async (villageCode: string): Promise<void> => {
@@ -23,13 +23,12 @@ export const useWeatherStore = defineStore('weather', () => {
       locationWeather.value = {
         locationCode: location.adm4,
         locationName: location.desa,
-        localDatetime: weather.local_datetime,
+        datetime: formattedDate(weather.datetime),
         weatherDesc: weather.weather_desc_en,
         temperature: weather.t,
         humidity: weather.hu,
         windSpeed: weather.ws,
-        windDirectionFrom: compass(weather.wd),
-        windDirectionTo: compass(weather.wd_to),
+        windDirection: `${compass(weather.wd)} to ${compass(weather.wd_to)}`,
         image: weather.image,
       }
     } catch (err) {

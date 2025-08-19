@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useProvinceStore } from '../stores/province'
 import { useRegencyStore } from '../stores/regency'
 import { useDistrictStore } from '../stores/district'
 import { useVillageStore } from '../stores/village'
 import type { Location } from '../models/location'
 import { useWeatherStore } from '../stores/weather'
+import { useFormStore } from '../stores/form'
 
 const provinceStore = useProvinceStore()
 const regencyStore = useRegencyStore()
 const districtStore = useDistrictStore()
 const villageStore = useVillageStore()
 const weatherStore = useWeatherStore()
+const formStore = useFormStore()
 
-const province = ref<string>('')
-const regency = ref<string>('')
-const district = ref<string>('')
-const village = ref<string>('')
+const form = formStore.form
 
 provinceStore.fetchProvinces()
 
@@ -32,36 +31,36 @@ const weather = computed(() => weatherStore.locationWeather)
 const weatherLoading = computed(() => weatherStore.loading)
 
 function onChangeProvince(): void {
-  regency.value = ''
-  district.value = ''
-  village.value = ''
-  regencyStore.fetchRegencies(province.value)
+  formStore.resetRegencyDistrictVillage()
+  regencyStore.fetchRegencies(form.province)
 }
 
 function onChangeRegency(): void {
-  district.value = ''
-  village.value = ''
-  districtStore.fetchDistricts(regency.value)
+  formStore.resetDistrictVillage()
+  districtStore.fetchDistricts(form.regency)
 }
 
 function onChangeDistrict(): void {
-  village.value = ''
-  villageStore.fetchVillages(district.value)
+  formStore.resetVillage()
+  villageStore.fetchVillages(form.district)
 }
 
 function onSelectVillage(): void {
-  if (village.value) {
-    weatherStore.fetchWeather(village.value)
+  if (form.village) {
+    weatherStore.fetchWeather(form.village)
   }
 }
 </script>
 
 <template>
   <div>
+    <div class="text-lg mb-5 text-center">
+      Please choose location
+    </div>
     <select
       class="input-width"
       placeholder="Select Province"
-      v-model="province"
+      v-model="form.province"
       @change="onChangeProvince"
     >
       <option value="">
@@ -72,12 +71,12 @@ function onSelectVillage(): void {
       </option>
     </select>
 
-    <div v-if="!!province">
+    <div v-if="!!form.province">
       <br />
       <select
         class="input-width"
         placeholder="Select Regency"
-        v-model="regency"
+        v-model="form.regency"
         @change="onChangeRegency"
       >
         <option value="">
@@ -89,12 +88,12 @@ function onSelectVillage(): void {
       </select>
     </div>
 
-    <div v-if="!!regency">
+    <div v-if="!!form.regency">
       <br />
       <select
         class="input-width"
         placeholder="Select District"
-        v-model="district"
+        v-model="form.district"
         @change="onChangeDistrict"
       >
         <option value="">
@@ -106,12 +105,12 @@ function onSelectVillage(): void {
       </select>
     </div>
 
-    <div v-if="!!district">
+    <div v-if="!!form.district">
       <br />
       <select
         class="input-width"
         placeholder="Select Village"
-        v-model="village"
+        v-model="form.village"
         @change="onSelectVillage"
       >
         <option value="">
@@ -123,7 +122,7 @@ function onSelectVillage(): void {
       </select>
     </div>
 
-    <div v-show="!!village">
+    <div v-show="!!form.village">
       <br />
       <pre v-show="weatherLoading">Loading...</pre>
       <pre v-show="!weatherLoading">{{ weather }}</pre>
@@ -133,6 +132,6 @@ function onSelectVillage(): void {
 
 <style scoped>
 .input-width {
-  width: 220px;
+  width: 260px;
 }
 </style>
