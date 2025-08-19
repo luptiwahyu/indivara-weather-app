@@ -44,6 +44,7 @@ Enable Allow CORS Extension
 - Axios
 - [Wilayah.id](https://wilayah.id/) (API for Administrative Area in Indonesia)
 - [BMKG Open Weather Forecast Data](https://data.bmkg.go.id/prakiraan-cuaca/)
+- [Weather Icons](https://erikflowers.github.io/weather-icons/)
 
 ### Structure
 

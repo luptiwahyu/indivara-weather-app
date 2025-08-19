@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios'
 import type { AxiosResponse } from 'axios'
 import { ref } from 'vue'
 import type { Location, LocationResponse } from '../models/location'
-import { BASE_URL } from '@/shared/constants'
+import { BASE_URL } from '../constants'
 
 export const useVillageStore = defineStore('village', () => {
   const villages = ref<Location[]>([])

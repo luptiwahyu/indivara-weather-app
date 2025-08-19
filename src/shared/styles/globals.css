@@ -1,0 +1,10 @@
+@import './base.css';
+@import 'tailwindcss';
+
+select {
+  @apply
+  p-1.5
+  border
+  border-gray-500
+  rounded-sm;
+}
