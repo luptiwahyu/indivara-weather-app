@@ -46,53 +46,38 @@ Enable Allow CORS Extension
 - [BMKG Open Weather Forecast Data](https://data.bmkg.go.id/prakiraan-cuaca/)
 - [Weather Icons](https://erikflowers.github.io/weather-icons/)
 
-### Structure
+### Architecture
+
+Feature-Based Architecture
 
     src
     ├── features/
     │   ├── weather/
-    │   │   ├── components/                       # Feature Components
-    │   │   │   ├── product-card.tsx
-    │   │   │   ├── product-card.test.tsx
-    │   │   │   └── product-card.module.css
+    │   │   ├── components/                       # Feature components
+    │   │   │   ├── WeatherCard.vue
+    │   │   │   └── WeatherForm.vue
     │   │   ├── constants/                        # Constant module
     │   │   │   └── index.ts
     │   │   ├── models/                           # Interface and type definitions
-    │   │   │   ├── product.ts
-    │   │   │   └── product-props.ts
+    │   │   │   ├── form.ts
+    │   │   │   ├── location.ts
+    │   │   │   └── weather.ts
     │   │   ├── pages/                            # Feature page
     │   │   │   └── WeatherMain.vue
     │   │   ├── stores/                           # State management
-    │   │   │   ├── product.ts
+    │   │   │   ├── district.ts
+    │   │   │   ├── form.ts
+    │   │   │   ├── province.ts
+    │   │   │   ├── regency.ts
+    │   │   │   ├── village.ts
+    │   │   │   └── weather.ts
     │   │   ├── styles/                           # Style module
-    │   │   │   └── index.module.css
+    │   │   │   └── index.css
     │   │   ├── utils/                            # Small and reusable helper functions
     │   │   │   └── helper.ts
     ├── shared/
-    │   ├── components/                           # Reusable component
-    │   │   ├── layout/
-    │   │   │   ├── header.tsx
-    │   │   │   ├── footer.tsx
-    │   │   │   └── sidebar.tsx
-    │   │   ├── button/
-    │   │   │   ├── button.tsx
-    │   │   │   ├── button.test.tsx
-    │   │   │   └── button.module.css
-    │   ├── constants/                            # Global constant
-    │   │   └── index.ts
-    │   ├── models/                               # Interface and type definitions
-    │   │   └── user.ts
-    │   ├── stores/                               # State management
-    │   │   └── theme.ts
     │   ├── styles/                               # Global style
-    │   │   ├── global.css
-    │   │   ├── variable.css
-    │   │   ├── theme-light.css
-    │   │   └── theme-dark.css
-    │   ├── utils/                                # Small and reusable helper functions
-    │   │   ├── date.ts
-    │   │   └── validation.ts
-    ├── assets/                                   # Assets
-    │   ├── fonts/
-    │   ├── icons/
-    │   └── images/
+    │   │   ├── base.css
+    │   │   └── globals.css
+    ├── App.vue
+    └── main.ts
