@@ -53,30 +53,30 @@ Feature-Based Architecture
     src
     ├── features/
     │   ├── weather/
-    │   │   ├── components/                       # Feature components
+    │   │   ├── components/              # Feature components
     │   │   │   ├── WeatherCard.vue
     │   │   │   └── WeatherForm.vue
-    │   │   ├── constants/                        # Constant module
+    │   │   ├── constants/               # Constant module
     │   │   │   └── index.ts
-    │   │   ├── models/                           # Interface and type definitions
+    │   │   ├── models/                  # Interface and type definitions
     │   │   │   ├── form.ts
     │   │   │   ├── location.ts
     │   │   │   └── weather.ts
-    │   │   ├── pages/                            # Feature page
+    │   │   ├── pages/                   # Feature page
     │   │   │   └── WeatherMain.vue
-    │   │   ├── stores/                           # State management
+    │   │   ├── stores/                  # State management
     │   │   │   ├── district.ts
     │   │   │   ├── form.ts
     │   │   │   ├── province.ts
     │   │   │   ├── regency.ts
     │   │   │   ├── village.ts
     │   │   │   └── weather.ts
-    │   │   ├── styles/                           # Style module
+    │   │   ├── styles/                  # Style module
     │   │   │   └── index.css
-    │   │   ├── utils/                            # Small and reusable helper functions
+    │   │   ├── utils/                   # Small and reusable helper functions
     │   │   │   └── helper.ts
     ├── shared/
-    │   ├── styles/                               # Global style
+    │   ├── styles/                      # Global style
     │   │   ├── base.css
     │   │   └── globals.css
     ├── App.vue
